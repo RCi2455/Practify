@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post Operative Instructions – Oral Surgery | Complete Dentistry</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Tinos:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --header-bg:    #3D3830;   /* dark warm charcoal — header */
+    --gold:         #C9BA9B;   /* champagne gold — nav / brand accent */
+    --gold-deep:    #BFA98A;   /* deeper gold — logo tone / dividers */
+    --page-bg:      #5A5A59;   /* charcoal — outer page background */
+    --content-bg:   #F7F5F1;   /* off-white — content background */
+    --white:        #FFFFFF;
+    --gold-pale:    #F0EBE0;   /* soft tint for alert/intro boxes */
+    --grey-mid:     #8A8880;
+    --grey-light:   #E4E0D8;
+    --text:         #2E2B26;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    background: var(--page-bg);
+    color: var(--text);
+    font-size: 13.5px;
+    line-height: 1.75;
+    padding: 36px 20px 56px;
+  }
+
+  @media print {
+    body { background: white; padding: 0; font-size: 11px; }
+    .no-print { display: none !important; }
+    .page { box-shadow: none; margin: 0; max-width: 100%; }
+    header, .section-header, .intro-box, .alert-box, .gold-bar
+      { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  /* ── CARD ── */
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--white);
+    box-shadow: 0 8px 48px rgba(0,0,0,0.28);
+    overflow: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--header-bg);
+    padding: 28px 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo-area h1 {
+    font-family: 'Tinos', serif;
+    font-weight: 700;
+    font-size: 21px;
+    color: var(--gold);
+    letter-spacing: 0.4px;
+  }
+
+  .logo-area p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 9.5px;
+    color: rgba(201,186,155,0.55);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .practice-info {
+    text-align: right;
+    font-size: 10px;
+    color: rgba(201,186,155,0.5);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .practice-info strong {
+    color: rgba(201,186,155,0.8);
+    font-weight: 400;
+  }
+
+  /* ── GOLD BAR ── */
+  .gold-bar {
+    height: 3px;
+    background: linear-gradient(to right, var(--gold-deep), var(--gold), var(--gold-deep));
+  }
+
+  /* ── TITLE BAND ── */
+  .doc-title-band {
+    background: var(--content-bg);
+    border-bottom: 1px solid var(--grey-light);
+    padding: 24px 44px 20px;
+  }
+
+  .doc-title-band .subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+  }
+
+  .doc-title-band h2 {
+    font-family: 'Tinos', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--header-bg);
+    line-height: 1.2;
+  }
+
+  .doc-title-band .doc-sub {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11.5px;
+    font-weight: 300;
+    color: var(--grey-mid);
+    margin-top: 5px;
+    letter-spacing: 0.2px;
+  }
+
+  /* ── CONTENT ── */
+  .content {
+    background: var(--white);
+    padding: 32px 44px 36px;
+  }
+
+  .intro-box {
+    background: var(--header-bg);
+    color: var(--gold);
+    padding: 15px 22px;
+    margin-bottom: 28px;
+    font-family: 'Tinos', serif;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    border-left: 3px solid var(--gold-deep);
+    letter-spacing: 0.2px;
+  }
+
+  /* ── SECTION HEADERS ── */
+  .section-header {
+    background: var(--header-bg);
+    color: var(--white);
+    padding: 7px 16px;
+    margin: 22px 0 9px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-header::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  /* ── INSTRUCTION TEXT ── */
+  .instruction-text {
+    padding: 0 2px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    color: var(--text);
+    font-size: 12.5px;
+    line-height: 1.8;
+  }
+
+  em { font-style: italic; }
+  strong { font-weight: 600; color: var(--header-bg); }
+
+  /* ── MEDS ROW ── */
+  .meds-row {
+    display: flex;
+    gap: 14px;
+    margin-top: 12px;
+  }
+
+  .med-pill {
+    background: var(--content-bg);
+    border-left: 3px solid var(--gold-deep);
+    padding: 9px 18px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--header-bg);
+    flex: 1;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── ALERT BOX ── */
+  .alert-box {
+    border: 1.5px solid var(--gold-deep);
+    background: var(--gold-pale);
+    padding: 16px 20px;
+    margin: 26px 0 0;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .alert-icon {
+    font-size: 20px;
+    line-height: 1;
+    margin-top: 1px;
+    flex-shrink: 0;
+    color: var(--gold-deep);
+  }
+
+  .alert-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--header-bg);
+    line-height: 1.6;
+  }
+
+  .alert-text .contact {
+    font-weight: 300;
+    margin-top: 6px;
+    display: block;
+  }
+
+  /* ── ACKNOWLEDGEMENT ── */
+  .acknowledgement-box {
+    margin: 26px 0 0;
+    border: 1px solid var(--grey-light);
+    background: var(--content-bg);
+    padding: 22px 26px;
+  }
+
+  .acknowledgement-box h3 {
+    font-family: 'Tinos', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--header-bg);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--gold-deep);
+  }
+
+  .confirmation-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11.5px;
+    font-weight: 300;
+    color: var(--grey-mid);
+    line-height: 1.7;
+  }
+
+  /* ── BUTTONS ── */
+  .button-row {
+    display: flex;
+    gap: 12px;
+    padding: 24px 44px 32px;
+    background: var(--white);
+  }
+
+  .btn {
+    padding: 13px 22px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    flex: 1;
+  }
+
+  .btn-dark {
+    background: var(--header-bg);
+    color: var(--gold);
+  }
+
+  .btn-dark:hover { background: #2a2520; }
+
+  .btn-gold {
+    background: var(--gold-deep);
+    color: var(--white);
+  }
+
+  .btn-gold:hover { background: var(--gold); color: var(--header-bg); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--header-bg);
+    padding: 14px 44px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(201,186,155,0.2);
+  }
+
+  footer p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 9px;
+    font-weight: 300;
+    color: rgba(201,186,155,0.4);
+    letter-spacing: 0.3px;
+  }
+
+  footer .footer-tel {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+  }
+
+
+  /* DIGITAL SIGNATURE */
+  .digital-sig-block { margin:26px 0 0; border:1px solid var(--grey-light); background:var(--content-bg); padding:22px 26px; }
+  .digital-sig-label { font-family:'Tinos',serif; font-size:16px; font-weight:700; color:var(--header-bg); margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid var(--gold-deep); }
+  .digital-sig-note { font-size:11.5px; font-weight:300; color:var(--grey-mid); line-height:1.65; margin-bottom:16px; }
+  .digital-sig-row { display:flex; gap:24px; align-items:flex-end; flex-wrap:wrap; }
+  .digital-sig-input-wrap { flex:1; min-width:220px; }
+  .digital-sig-input-wrap input { width:100%; border:none; border-bottom:1.5px solid var(--gold-deep); background:transparent; font-family:'Poppins',sans-serif; font-size:13px; color:var(--header-bg); padding:6px 4px; outline:none; }
+  .digital-sig-input-wrap input:focus { border-bottom-color:var(--header-bg); }
+  .digital-sig-input-wrap label, .digital-sig-date-wrap label { display:block; font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:1.5px; color:var(--grey-mid); margin-top:6px; }
+  .digital-sig-date-wrap { min-width:120px; }
+  .sig-date-val { font-size:13px; color:var(--header-bg); font-weight:300; padding:6px 4px; border-bottom:1.5px solid var(--grey-light); }
+  .sig-rendered-row { margin-top:18px; }
+  .sig-rendered-wrap { display:inline-block; min-width:260px; }
+  .sig-rendered-wrap label { display:block; font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:1.5px; color:var(--grey-mid); margin-top:6px; }
+  .sig-rendered-empty { font-family:'Poppins',sans-serif; font-size:13px; font-weight:300; color:var(--grey-light); border-bottom:1.5px solid var(--grey-light); padding:4px 4px 6px; min-width:260px; font-style:italic; }
+  .sig-rendered { font-family:'Tinos',serif; font-size:26px; font-weight:400; color:var(--header-bg); border-bottom:1.5px solid var(--header-bg); padding:2px 4px 4px; min-width:260px; letter-spacing:0.5px; }
+
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-area">
+      <h1>Complete Dentistry</h1>
+      <p>Warlingham · Surrey</p>
+    </div>
+    <div class="practice-info">
+      <strong>1 Church Road, Warlingham, Surrey CR6 9NW</strong><br>
+      Tel: 01883 622222<br>
+      completedentistrysurrey.co.uk
+    </div>
+  </header>
+  <div class="gold-bar"></div>
+
+  <!-- TITLE -->
+  <div class="doc-title-band">
+    <div class="subtitle">Patient Information</div>
+    <h2>Post Operative Instructions</h2>
+    <div class="doc-sub">Following Oral Surgery or Tooth Extraction</div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <div class="intro-box">
+      A clean and healthy mouth aids healing.
+    </div>
+
+    <div class="section-header">Rest</div>
+    <div class="instruction-text">
+      Rest for a few hours following treatment and avoid strenuous exercise.
+    </div>
+
+    <div class="section-header">Rinsing</div>
+    <div class="instruction-text">
+      Do not rinse for at least <strong>24 hours</strong> after the last time the area bled. For several days following treatment, rinse your mouth <em>gently</em> after meals and before retiring using a mouthwash made by dissolving <strong>½ teaspoon of salt</strong> in a tumbler of water as hot as you can tolerate. Hold the solution in your mouth over the operation site without swishing for several minutes, discard and repeat <strong>2–3 times</strong>.
+    </div>
+
+    <div class="section-header">Brushing</div>
+    <div class="instruction-text">
+      Brush the rest of your teeth as normal but <strong>avoid the tooth either side of the socket</strong> for the first week.
+    </div>
+
+    <div class="section-header">Food &amp; Drink</div>
+    <div class="instruction-text">
+      Avoid <strong>hot fluids, alcohol, smoking, hard or chewy foods</strong> for 24 hours. Choose cool drinks and soft or minced foods. Avoid sucking at or interfering with the wound.
+    </div>
+
+    <div class="section-header">Bleeding</div>
+    <div class="instruction-text">
+      If bleeding should recur, bite on a gauze pack or rolled-up damp handkerchief <strong>directly over the wound</strong>. Keep your teeth together with firm pressure for at least <strong>10 minutes</strong>. Sit upright.
+    </div>
+
+    <div class="section-header">Pain Relief</div>
+    <div class="instruction-text">
+      Swelling is to be expected in most cases. Pain killing tablets to be taken as directed.
+    </div>
+    <div class="meds-row">
+      <div class="med-pill">Ibuprofen</div>
+      <div class="med-pill">Paracetamol</div>
+    </div>
+
+    <div class="alert-box">
+      <div class="alert-icon">⚠</div>
+      <div class="alert-text">
+        If excessive bleeding, undue pain or other symptoms occur, contact your Dental Surgeon for advice without delay.
+        <span class="contact">Practice: <strong>01883 622222</strong></span>
+      </div>
+    </div>
+
+    <div class="digital-sig-block">
+      <div class="digital-sig-label">Patient Digital Signature</div>
+      <p class="digital-sig-note">By typing your full name below you confirm you have read and understood this document.</p>
+      <div class="digital-sig-row">
+        <div class="digital-sig-input-wrap">
+          <input type="text" id="sig-input" placeholder="Type your full name here…" oninput="updateSig()" autocomplete="off" spellcheck="false" />
+          <label>Full Name (acts as your digital signature)</label>
+        </div>
+        <div class="digital-sig-date-wrap">
+          <div id="sig-date-display" class="sig-date-val"></div>
+          <label>Date</label>
+        </div>
+      </div>
+      <div class="sig-rendered-row">
+        <div class="sig-rendered-wrap">
+          <div id="sig-rendered" class="sig-rendered-empty">Your signature will appear here</div>
+          <label>Signature</label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="button-row no-print">
+    <button class="btn btn-dark" onclick="window.print()">⬇ Save / Print as PDF</button>
+    <button class="btn btn-gold" onclick="sendAck()">✓ I Acknowledge These Instructions</button>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Complete Dentistry is a trading name of Warlingham Green Health Limited · Registered No. 07311805</p>
+    <span class="footer-tel">01883 622222</span>
+  </footer>
+
+</div>
+
+<script>
+  const now = new Date();
+  const dateStr = String(now.getDate()).padStart(2,'0') + '/' + String(now.getMonth()+1).padStart(2,'0') + '/' + now.getFullYear();
+  const timeStr = now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+  document.getElementById('sig-date-display').textContent = dateStr;
+
+  function updateSig() {
+    const val = document.getElementById('sig-input').value.trim();
+    const el  = document.getElementById('sig-rendered');
+    if (val) { el.textContent = val; el.className = 'sig-rendered'; }
+    else     { el.textContent = 'Your signature will appear here'; el.className = 'sig-rendered-empty'; }
+  }
+
+  function sendAck() {
+    const name = document.getElementById('sig-input').value.trim();
+    if (!name) { alert('Please type your full name in the signature field before acknowledging.'); document.getElementById('sig-input').focus(); return; }
+    window.location.href = 'mailto:reception@completedentistrysurrey.co.uk?subject=' +
+      encodeURIComponent('Patient Acknowledged: Post Operative Instructions – Oral Surgery – ' + name) +
+      '&body=' + encodeURIComponent(
+        'Document Acknowledgement\n────────────────────────────────────\n' +
+        'Document  : Post Operative Instructions – Oral Surgery / Tooth Extraction\n' +
+        'Patient   : ' + name + '\n' +
+        'Signed    : ' + dateStr + ' at ' + timeStr + '\n\n' +
+        name + ' has digitally confirmed they have read and understood this document.\n' +
+        'Please add this record to the patient\'s notes.\n\n' +
+        '— Complete Dentistry Patient Documents'
+      );
+  }
+</script>
+
+</body>
+</html>

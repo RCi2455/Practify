@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consent to Dental Implants | Complete Dentistry</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Tinos:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root { --header-bg:#3D3830; --gold:#C9BA9B; --gold-deep:#BFA98A; --page-bg:#5A5A59; --content-bg:#F7F5F1; --white:#FFFFFF; --gold-pale:#F0EBE0; --grey-mid:#8A8880; --grey-light:#E4E0D8; --text:#2E2B26; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Poppins',sans-serif; font-weight:300; background:var(--page-bg); color:var(--text); font-size:13.5px; line-height:1.75; padding:36px 20px 56px; }
+@media print { body{background:white;padding:0;font-size:11px;} .no-print{display:none!important;} .page{box-shadow:none;margin:0;max-width:100%;} header,.gold-bar,.consent-num,.sig-line{-webkit-print-color-adjust:exact;print-color-adjust:exact;} }
+.page { max-width:760px; margin:0 auto; background:var(--white); box-shadow:0 8px 48px rgba(0,0,0,0.28); overflow:hidden; }
+header { background:var(--header-bg); padding:28px 44px; display:flex; align-items:center; justify-content:space-between; }
+.logo-area h1 { font-family:'Tinos',serif; font-weight:700; font-size:21px; color:var(--gold); }
+.logo-area p { font-weight:300; font-size:9.5px; color:rgba(201,186,155,0.55); letter-spacing:2.5px; text-transform:uppercase; margin-top:2px; }
+.practice-info { text-align:right; font-size:10px; color:rgba(201,186,155,0.5); line-height:1.65; }
+.practice-info strong { color:rgba(201,186,155,0.8); font-weight:400; }
+.gold-bar { height:3px; background:linear-gradient(to right,var(--gold-deep),var(--gold),var(--gold-deep)); }
+.doc-title-band { background:var(--content-bg); border-bottom:1px solid var(--grey-light); padding:24px 44px 20px; }
+.doc-title-band .subtitle { font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:3px; color:var(--gold-deep); margin-bottom:6px; }
+.doc-title-band h2 { font-family:'Tinos',serif; font-size:28px; font-weight:700; color:var(--header-bg); }
+.doc-title-band .doc-sub { font-size:11.5px; font-weight:300; color:var(--grey-mid); margin-top:5px; }
+.patient-strip { background:var(--content-bg); border-bottom:1px solid var(--grey-light); padding:14px 44px; display:flex; gap:36px; flex-wrap:wrap; align-items:center; }
+.patient-field { display:flex; align-items:center; gap:10px; }
+.patient-field label { font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:1.8px; color:var(--grey-mid); white-space:nowrap; }
+.patient-field input { border:none; border-bottom:1.5px solid var(--gold-deep); background:transparent; font-family:'Poppins',sans-serif; font-size:12.5px; color:var(--header-bg); padding:2px 4px; outline:none; width:200px; }
+.content { background:var(--white); padding:32px 44px 36px; }
+.consent-intro { background:var(--content-bg); border-left:3px solid var(--gold-deep); padding:14px 18px; margin-bottom:28px; font-size:12px; font-weight:300; color:var(--grey-mid); line-height:1.7; font-style:italic; }
+/* Consent items */
+.consent-item { display:flex; gap:16px; align-items:flex-start; margin-bottom:0; padding:14px 0; border-bottom:1px solid var(--grey-light); }
+.consent-item:last-child { border-bottom:none; }
+.consent-num { background:var(--header-bg); color:var(--gold); font-family:'Tinos',serif; font-size:13px; font-weight:700; min-width:28px; height:28px; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:3px; }
+.consent-text { font-size:12.5px; font-weight:300; line-height:1.8; }
+.consent-text strong { font-weight:600; color:var(--header-bg); }
+/* Signature block */
+.sig-section { margin:28px 0 0; background:var(--content-bg); border:1px solid var(--grey-light); padding:24px 26px; }
+.sig-section h3 { font-family:'Tinos',serif; font-size:16px; font-weight:700; color:var(--header-bg); margin-bottom:14px; padding-bottom:8px; border-bottom:1px solid var(--gold-deep); }
+.sig-confirmation { font-size:12px; font-weight:300; color:var(--grey-mid); line-height:1.75; margin-bottom:20px; }
+.sig-confirmation strong { font-weight:600; color:var(--header-bg); }
+.sig-row { display:flex; gap:28px; flex-wrap:wrap; }
+.sig-field { flex:1; min-width:150px; }
+.sig-line { border-bottom:1.5px solid var(--header-bg); min-height:36px; }
+.sig-field label { display:block; font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:1.5px; color:var(--grey-mid); margin-top:6px; }
+.button-row { display:flex; gap:12px; padding:24px 44px 32px; }
+.btn { padding:13px 22px; font-family:'Poppins',sans-serif; font-size:10px; font-weight:600; letter-spacing:1.8px; text-transform:uppercase; cursor:pointer; border:none; transition:all 0.2s; flex:1; }
+.btn-dark { background:var(--header-bg); color:var(--gold); }
+.btn-gold { background:var(--gold-deep); color:var(--white); }
+.btn-gold:hover { background:var(--gold); color:var(--header-bg); }
+footer { background:var(--header-bg); padding:14px 44px; display:flex; justify-content:space-between; align-items:center; }
+footer p { font-size:9px; font-weight:300; color:rgba(201,186,155,0.4); }
+footer .footer-tel { font-size:10px; font-weight:400; color:var(--gold); }
+
+  /* DIGITAL SIGNATURE */
+  .digital-sig-block { margin:26px 0 0; border:1px solid var(--grey-light); background:var(--content-bg); padding:22px 26px; }
+  .digital-sig-label { font-family:'Tinos',serif; font-size:16px; font-weight:700; color:var(--header-bg); margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid var(--gold-deep); }
+  .digital-sig-note { font-size:11.5px; font-weight:300; color:var(--grey-mid); line-height:1.65; margin-bottom:16px; }
+  .digital-sig-row { display:flex; gap:24px; align-items:flex-end; flex-wrap:wrap; }
+  .digital-sig-input-wrap { flex:1; min-width:220px; }
+  .digital-sig-input-wrap input { width:100%; border:none; border-bottom:1.5px solid var(--gold-deep); background:transparent; font-family:'Poppins',sans-serif; font-size:13px; color:var(--header-bg); padding:6px 4px; outline:none; }
+  .digital-sig-input-wrap input:focus { border-bottom-color:var(--header-bg); }
+  .digital-sig-input-wrap label, .digital-sig-date-wrap label { display:block; font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:1.5px; color:var(--grey-mid); margin-top:6px; }
+  .digital-sig-date-wrap { min-width:120px; }
+  .sig-date-val { font-size:13px; color:var(--header-bg); font-weight:300; padding:6px 4px; border-bottom:1.5px solid var(--grey-light); }
+  .sig-rendered-row { margin-top:18px; }
+  .sig-rendered-wrap { display:inline-block; min-width:260px; }
+  .sig-rendered-wrap label { display:block; font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:1.5px; color:var(--grey-mid); margin-top:6px; }
+  .sig-rendered-empty { font-family:'Poppins',sans-serif; font-size:13px; font-weight:300; color:var(--grey-light); border-bottom:1.5px solid var(--grey-light); padding:4px 4px 6px; min-width:260px; font-style:italic; }
+  .sig-rendered { font-family:'Tinos',serif; font-size:26px; font-weight:400; color:var(--header-bg); border-bottom:1.5px solid var(--header-bg); padding:2px 4px 4px; min-width:260px; letter-spacing:0.5px; }
+
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="logo-area"><h1>Complete Dentistry</h1><p>Warlingham · Surrey</p></div>
+    <div class="practice-info"><strong>1 Church Road, Warlingham, Surrey CR6 9NW</strong><br>Tel: 01883 622222<br>completedentistrysurrey.co.uk</div>
+  </header>
+  <div class="gold-bar"></div>
+  <div class="doc-title-band">
+    <div class="subtitle">Patient Consent Form</div>
+    <h2>Consent to the Placement of Dental Implants</h2>
+    <div class="doc-sub">Please read carefully before signing</div>
+  </div>
+  <div class="patient-strip">
+    <div class="patient-field"><label>Patient Name</label><input type="text" id="pname" placeholder="Full name" /></div>
+    <div class="patient-field"><label>Date</label><input type="text" id="pdate" placeholder="DD / MM / YYYY" style="width:130px;" /></div>
+  </div>
+  <div class="content">
+    <div class="consent-intro">
+      The purpose and nature of the surgical placement of dental implants and any later reconstruction has been explained to me. Please initial each statement to confirm your understanding before signing below.
+    </div>
+
+    <div class="consent-item">
+      <div class="consent-num">1</div>
+      <div class="consent-text">I consent to the use of <strong>local anaesthesia / intravenous sedation</strong> for the surgical procedure. I agree not to operate a motor vehicle or similar machinery for <strong>24 hours after sedation</strong>.</div>
+    </div>
+    <div class="consent-item">
+      <div class="consent-num">2</div>
+      <div class="consent-text">I understand that although every care is taken, <strong>the successful outcome cannot be guaranteed</strong>, but that failure of a dental implant is an infrequent event. In the event of failure, further implant surgery will be offered as appropriate.</div>
+    </div>
+    <div class="consent-item">
+      <div class="consent-num">3</div>
+      <div class="consent-text">It has been explained to me that possible <strong>complications</strong> may include discomfort, swelling and bruising. Numbness of the lip and tongue may follow surgery to the lower jaw. Sinus involvement and nose bleeding may occur following surgery to the upper jaw.</div>
+    </div>
+    <div class="consent-item">
+      <div class="consent-num">4</div>
+      <div class="consent-text">I understand that where bone is found to be inadequate, it may be necessary to place a <strong>bone graft or bone substitute</strong> to improve the chance of success.</div>
+    </div>
+    <div class="consent-item">
+      <div class="consent-num">5</div>
+      <div class="consent-text">I understand that after surgery it may be necessary to take <strong>antibiotics</strong> to counter infection, and I agree to refrain from <strong>smoking and alcohol consumption</strong> as advised.</div>
+    </div>
+    <div class="consent-item">
+      <div class="consent-num">6</div>
+      <div class="consent-text">I understand that <strong>mechanical failure</strong> such as fracture or loosening of the dentures, crowns and bridges may occur, but that this is an infrequent event with dental implants. Further clinical attention will be required in this event.</div>
+    </div>
+    <div class="consent-item">
+      <div class="consent-num">7</div>
+      <div class="consent-text"><strong>Alternative methods</strong> of tooth replacement have been explained to me.</div>
+    </div>
+    <div class="consent-item">
+      <div class="consent-num">8</div>
+      <div class="consent-text">I have given an accurate report of my <strong>medical history</strong>, including physical and psychiatric disorders, current medication and allergies.</div>
+    </div>
+    <div class="consent-item">
+      <div class="consent-num">9</div>
+      <div class="consent-text">I understand that the success of treatment depends in part on my <strong>maintenance of good hygiene</strong> around the implants. I undertake to arrange regular dental examinations, cleaning and x-ray examination as required.</div>
+    </div>
+
+    <div class="sig-section">
+      <h3>Patient Confirmation &amp; Signature</h3>
+      <p class="sig-confirmation">
+        I <strong id="sig-name-display" style="font-style:normal;"></strong> confirm that following my dental examination by <strong>Dr Richard Clarke-Irons</strong>, I have read and fully understand the information provided regarding the condition of my teeth and gums. I have considered and fully understand the treatment options offered and hereby give my consent for Dr Richard Clarke-Irons to carry out treatment. I understand that successful dental treatment is reliant upon me complying with the instructions I have been given, particularly with regard to smoking, alcohol, diet and oral hygiene. I confirm that I shall make payments in accordance with the terms contained within my treatment letter.
+      </p>
+
+      <div class="digital-sig-note" style="font-size:11.5px;font-weight:300;color:var(--grey-mid);line-height:1.65;margin-bottom:16px;">
+        By typing your full name below you confirm you have read, understood and consent to the contents of this document.
+      </div>
+      <div class="digital-sig-row" style="display:flex;gap:24px;align-items:flex-end;flex-wrap:wrap;">
+        <div style="flex:1;min-width:220px;">
+          <input type="text" id="sig-input" placeholder="Type your full name here…" oninput="updateSig()" autocomplete="off" spellcheck="false"
+            style="width:100%;border:none;border-bottom:1.5px solid var(--gold-deep);background:transparent;font-family:'Poppins',sans-serif;font-size:13px;color:var(--header-bg);padding:6px 4px;outline:none;" />
+          <label style="display:block;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--grey-mid);margin-top:6px;">Full Name (digital signature)</label>
+        </div>
+        <div style="min-width:120px;">
+          <div id="sig-date-display" style="font-size:13px;color:var(--header-bg);font-weight:300;padding:6px 4px;border-bottom:1.5px solid var(--grey-light);"></div>
+          <label style="display:block;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--grey-mid);margin-top:6px;">Date</label>
+        </div>
+      </div>
+      <div style="margin-top:18px;">
+        <div id="sig-rendered" class="sig-rendered-empty"
+          style="font-family:'Tinos',serif;font-size:26px;font-weight:400;color:var(--grey-light);border-bottom:1.5px solid var(--grey-light);padding:2px 4px 4px;min-width:260px;font-style:italic;display:inline-block;">
+          Your signature will appear here
+        </div>
+        <label style="display:block;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--grey-mid);margin-top:6px;">Signature</label>
+      </div>
+
+      <div style="margin-top:22px;padding-top:18px;border-top:1px solid var(--grey-light);">
+        <div style="display:flex;gap:28px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:150px;">
+            <div style="border-bottom:1.5px solid var(--header-bg);min-height:36px;"></div>
+            <label style="display:block;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--grey-mid);margin-top:6px;">Signature of Practitioner</label>
+          </div>
+          <div style="max-width:130px;">
+            <div style="border-bottom:1.5px solid var(--header-bg);min-height:36px;"></div>
+            <label style="display:block;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--grey-mid);margin-top:6px;">Date</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="button-row no-print">
+    <button class="btn btn-dark" onclick="window.print()">⬇ Save / Print as PDF</button>
+    <button class="btn btn-gold" onclick="sendAck()">✓ I Consent &amp; Acknowledge</button>
+  </div>
+  <footer>
+    <p>Complete Dentistry is a trading name of Warlingham Green Health Limited · Registered No. 07311805</p>
+    <span class="footer-tel">01883 622222</span>
+  </footer>
+</div>
+<script>
+  const now = new Date();
+  const dateStr = String(now.getDate()).padStart(2,'0') + '/' +
+                  String(now.getMonth()+1).padStart(2,'0') + '/' +
+                  now.getFullYear();
+  const timeStr = now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+  document.getElementById('sig-date-display').textContent = dateStr;
+
+  function updateSig() {
+    const val = document.getElementById('sig-input').value.trim();
+    const el  = document.getElementById('sig-rendered');
+    const nameDisplay = document.getElementById('sig-name-display');
+    if (val) {
+      el.textContent = val;
+      el.style.color = 'var(--header-bg)';
+      el.style.borderBottomColor = 'var(--header-bg)';
+      el.style.fontStyle = 'normal';
+      nameDisplay.textContent = ' ' + val + ',';
+    } else {
+      el.textContent = 'Your signature will appear here';
+      el.style.color = 'var(--grey-light)';
+      el.style.borderBottomColor = 'var(--grey-light)';
+      el.style.fontStyle = 'italic';
+      nameDisplay.textContent = '';
+    }
+  }
+
+  function sendAck() {
+    const name = document.getElementById('sig-input').value.trim();
+    if (!name) {
+      alert('Please type your full name in the signature field before submitting.');
+      document.getElementById('sig-input').focus();
+      return;
+    }
+    window.location.href =
+      'mailto:reception@completedentistrysurrey.co.uk?subject=' +
+      encodeURIComponent('Consent Form Completed: Dental Implants – ' + name) +
+      '&body=' +
+      encodeURIComponent(
+        'Document Acknowledgement\n────────────────────────────────────\n' +
+        'Document  : Consent to the Placement of Dental Implants\n' +
+        'Patient   : ' + name + '\n' +
+        'Signed    : ' + dateStr + ' at ' + timeStr + '\n\n' +
+        name + ' has digitally confirmed their consent to dental implant treatment.\n' +
+        'Please add this record to the patient\'s notes.\n\n' +
+        '— Complete Dentistry Patient Documents'
+      );
+  }
+</script>
+</body>
+</html>

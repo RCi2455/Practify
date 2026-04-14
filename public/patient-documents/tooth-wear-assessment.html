@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tooth Wear Assessment</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --header-bg: #3D3830;
+    --gold: #C9BA9B; --gold-deep: #BFA98A;
+    --content-bg: #F7F5F1;
+    --warm-grey: #EDE9E0;
+    --text: #2c2c2a;
+    --muted: #6b6760;
+    --border: #e0dbd3;
+    --green-soft: #f0fdf4;
+    --green-border: #86efac;
+    --green-text: #166534;
+    --amber-soft: #fffbeb;
+    --amber-border: #fcd34d;
+    --amber-text: #92400e;
+    --red-soft: #fff1f2;
+    --red-border: #fca5a5;
+    --red-text: #991b1b;
+  }
+
+  body {
+    background: var(--content-bg);
+    font-family: 'Poppins', sans-serif;
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 15px;
+    font-weight: 300;
+  }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 40px 80px;
+  }
+
+  header {
+    border-bottom: 2px solid #BFA98A;
+    padding-bottom: 24px;
+    margin-bottom: 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .practice-name {
+    font-family: 'Tinos', serif;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-family: 'Tinos', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--header-bg);
+    line-height: 1.2;
+  }
+
+  .header-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 220px;
+  }
+
+  .field-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .field-row input[type="text"],
+  .field-row input[type="date"] {
+    border: none;
+    border-bottom: 1px solid var(--border);
+    background: transparent;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    padding: 2px 4px;
+    outline: none;
+    width: 160px;
+  }
+
+  .section {
+    margin-bottom: 32px;
+  }
+
+  h2 {
+    font-family: 'Tinos', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--header-bg);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-num {
+    background: var(--header-bg);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .score-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .score-item {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+
+  .score-item:hover { border-color: var(--header-bg); }
+
+  .score-item label {
+    font-size: 14px;
+    color: var(--text);
+    cursor: pointer;
+    line-height: 1.4;
+  }
+
+  .score-item .pts {
+    font-family: 'Tinos', serif;
+    font-size: 13px;
+    color: var(--muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .score-item input[type="radio"],
+  .score-item input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    accent-color: var(--header-bg);
+    cursor: pointer;
+  }
+
+  .score-item.selected {
+    border-color: var(--header-bg);
+    background: #f0f4f8;
+  }
+
+  .score-item.selected .pts { color: var(--header-bg); font-weight: 600; }
+
+  .bewe-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+
+  .bewe-btn {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .bewe-btn:hover { border-color: var(--header-bg); }
+  .bewe-btn.active { background: var(--header-bg); border-color: var(--header-bg); color: white; }
+
+  .bewe-btn .score-num {
+    font-family: 'Tinos', serif;
+    font-size: 22px;
+    font-weight: 600;
+    display: block;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .bewe-btn .score-label {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.3;
+  }
+
+  .bewe-btn.active .score-label { color: rgba(255,255,255,0.7); }
+
+  .risk-display {
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 24px 0;
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .risk-display.empty {
+    background: var(--warm-grey);
+    border: 1.5px dashed var(--border);
+  }
+
+  .risk-display.low {
+    background: var(--green-soft);
+    border: 2px solid var(--green-border);
+  }
+
+  .risk-display.medium {
+    background: var(--amber-soft);
+    border: 2px solid var(--amber-border);
+  }
+
+  .risk-display.high {
+    background: var(--red-soft);
+    border: 2px solid var(--red-border);
+  }
+
+  .risk-score {
+    font-family: 'Tinos', serif;
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .risk-display.empty .risk-score { color: var(--border); }
+  .risk-display.low .risk-score { color: var(--green-text); }
+  .risk-display.medium .risk-score { color: var(--amber-text); }
+  .risk-display.high .risk-score { color: var(--red-text); }
+
+  .risk-label {
+    font-family: 'Tinos', serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .risk-display.empty .risk-label { color: var(--muted); }
+  .risk-display.low .risk-label { color: var(--green-text); }
+  .risk-display.medium .risk-label { color: var(--amber-text); }
+  .risk-display.high .risk-label { color: var(--red-text); }
+
+  .risk-sublabel {
+    font-size: 13px;
+  }
+
+  .risk-display.empty .risk-sublabel { color: var(--muted); }
+  .risk-display.low .risk-sublabel { color: var(--green-text); }
+  .risk-display.medium .risk-sublabel { color: var(--amber-text); }
+  .risk-display.high .risk-sublabel { color: var(--red-text); }
+
+  .factors-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .factor-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: white;
+  }
+
+  .factor-item input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    accent-color: var(--header-bg);
+    cursor: pointer;
+  }
+
+  .factor-item label {
+    font-size: 13.5px;
+    line-height: 1.5;
+    cursor: pointer;
+  }
+
+  .recs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .rec-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: white;
+  }
+
+  .rec-item input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    accent-color: var(--header-bg);
+    cursor: pointer;
+  }
+
+  .rec-item label { font-size: 14px; line-height: 1.5; cursor: pointer; }
+
+  .next-steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .next-step-card {
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .next-step-card.low { background: var(--green-soft); border: 1.5px solid var(--green-border); }
+  .next-step-card.medium { background: var(--amber-soft); border: 1.5px solid var(--amber-border); }
+  .next-step-card.high { background: var(--red-soft); border: 1.5px solid var(--red-border); }
+
+  .next-step-card .step-label {
+    font-family: 'Tinos', serif;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .next-step-card.low .step-label { color: var(--green-text); }
+  .next-step-card.medium .step-label { color: var(--amber-text); }
+  .next-step-card.high .step-label { color: var(--red-text); }
+
+  .next-step-card p {
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+
+  .next-step-card.low p { color: var(--green-text); }
+  .next-step-card.medium p { color: var(--amber-text); }
+  .next-step-card.high p { color: var(--red-text); }
+
+  .next-step-card.active-step {
+    transform: scale(1.03);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+
+  .notes-area {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: white;
+    resize: vertical;
+    min-height: 80px;
+    outline: none;
+  }
+
+  .notes-area:focus { border-color: var(--header-bg); }
+
+  .print-btn {
+    background: var(--header-bg);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 13px 36px;
+    font-family: 'Tinos', serif;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 32px;
+    display: block;
+    width: 100%;
+  }
+
+  .print-btn:hover { background: #254d7a; }
+
+  .score-breakdown {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  .threshold-note {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  @media print {
+    body { background: white; font-size: 13px; }
+    .page { padding: 16px 20px; }
+    .print-btn { display: none; }
+    .risk-display, .next-step-card, .alert { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .score-item.selected { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  @media (max-width: 580px) {
+    .page { padding: 24px 16px 60px; }
+    .score-grid, .factors-grid { grid-template-columns: 1fr; }
+    .next-steps { grid-template-columns: 1fr; }
+    .bewe-grid { grid-template-columns: repeat(5, 1fr); }
+    header { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* CD BRAND ADDITIONS */
+  .dig-sig-wrap { margin:40px 0 0; border:1px solid #E4E0D8; background:#F7F5F1; padding:24px 28px; border-radius:4px; }
+  .dig-sig-title { font-family:'Tinos',serif; font-size:18px; font-weight:700; color:#3D3830; margin-bottom:8px; padding-bottom:8px; border-bottom:1.5px solid #BFA98A; }
+  .dig-sig-note { font-size:12px; font-weight:300; color:#8A8880; line-height:1.65; margin-bottom:16px; font-family:'Poppins',sans-serif; }
+  .dig-sig-row { display:flex; gap:24px; align-items:flex-end; flex-wrap:wrap; }
+  .dig-sig-input-wrap { flex:1; min-width:200px; }
+  .dig-sig-input-wrap input { width:100%; border:none; border-bottom:1.5px solid #BFA98A; background:transparent; font-family:'Poppins',sans-serif; font-size:13px; color:#3D3830; padding:6px 4px; outline:none; }
+  .dig-sig-input-wrap label, .dig-sig-date-wrap label { display:block; font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:1.5px; color:#8A8880; margin-top:6px; font-family:'Poppins',sans-serif; }
+  .dig-sig-date-wrap { min-width:110px; }
+  .sig-date-val { font-size:13px; color:#3D3830; font-weight:300; padding:6px 4px; border-bottom:1.5px solid #E4E0D8; font-family:'Poppins',sans-serif; }
+  .sig-rendered-wrap { display:inline-block; min-width:240px; }
+  .sig-rendered-empty { font-family:'Poppins',sans-serif; font-size:13px; font-weight:300; color:#E4E0D8; border-bottom:1.5px solid #E4E0D8; padding:4px 4px 6px; min-width:240px; font-style:italic; }
+  .sig-rendered { font-family:'Tinos',serif; font-size:28px; font-weight:400; color:#3D3830; border-bottom:1.5px solid #3D3830; padding:2px 4px 4px; min-width:240px; letter-spacing:0.5px; }
+  .btn-row { display:flex; gap:12px; margin:24px 0 0; }
+  .cd-btn { padding:13px 22px; font-family:'Poppins',sans-serif; font-size:10px; font-weight:600; letter-spacing:1.8px; text-transform:uppercase; cursor:pointer; border:none; transition:all 0.2s; flex:1; border-radius:2px; }
+  .cd-btn-dark { background:#3D3830; color:#C9BA9B; }
+  .cd-btn-gold { background:#BFA98A; color:#fff; }
+  .cd-btn-gold:hover { background:#C9BA9B; color:#3D3830; }
+  @media print { .btn-row,.dig-sig-input-wrap input { display:none; } .sig-rendered-empty { display:none; } }
+
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div>
+      <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#BFA98A;margin-bottom:8px;font-family:'Poppins',sans-serif;font-weight:600;">Complete Dentistry · Clinical Assessment</div>
+      <h1 style="font-family:'Tinos',serif;font-size:28px;color:#3D3830;">Tooth Wear Assessment</h1>
+    </div>
+    <div class="header-fields">
+      <div class="field-row">
+        <span>Patient:</span>
+        <input type="text" placeholder="Full name" id="patientName">
+      </div>
+      <div class="field-row">
+        <span>Date:</span>
+        <input type="date" id="assessmentDate">
+      </div>
+      <div class="field-row">
+        <span>Clinician:</span>
+        <input type="text" placeholder="Name" id="clinicianName">
+      </div>
+    </div>
+  </header>
+
+  <div class="section">
+    <h2><span class="section-num">1</span> Patient profile</h2>
+    <div class="score-grid">
+      <div class="score-item" onclick="selectRadio('sex','male',2,this)">
+        <input type="radio" name="sex" id="male" value="2">
+        <label for="male">Male</label>
+        <span class="pts">+2 pts</span>
+      </div>
+      <div class="score-item" onclick="selectRadio('sex','female',0,this)">
+        <input type="radio" name="sex" id="female" value="0">
+        <label for="female">Female</label>
+        <span class="pts">+0 pts</span>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;">
+      <div class="score-grid">
+        <div class="score-item" onclick="selectRadio('age','under40',0,this)">
+          <input type="radio" name="age" id="under40" value="0">
+          <label for="under40">Age under 40</label>
+          <span class="pts">+0 pts</span>
+        </div>
+        <div class="score-item" onclick="selectRadio('age','age4060',1,this)">
+          <input type="radio" name="age" id="age4060" value="1">
+          <label for="age4060">Age 40–60</label>
+          <span class="pts">+1 pt</span>
+        </div>
+        <div class="score-item" onclick="selectRadio('age','age61plus',2,this)">
+          <input type="radio" name="age" id="age61plus" value="2">
+          <label for="age61plus">Age 61+</label>
+          <span class="pts">+2 pts</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="section-num">2</span> Risk factors</h2>
+    <div class="score-grid">
+      <div class="score-item" onclick="selectRadio('eating','eating4plus',2,this)">
+        <input type="radio" name="eating" id="eating4plus" value="2">
+        <label for="eating4plus">4 or more eating occasions per day</label>
+        <span class="pts">+2 pts</span>
+      </div>
+      <div class="score-item" onclick="selectRadio('eating','eatingunder4',0,this)">
+        <input type="radio" name="eating" id="eatingunder4" value="0">
+        <label for="eatingunder4">Fewer than 4 eating occasions per day</label>
+        <span class="pts">+0 pts</span>
+      </div>
+      <div class="score-item" onclick="toggleCheck('reflux',1,this)">
+        <input type="checkbox" id="reflux" value="1">
+        <label for="reflux">Acid reflux / GORD / indigestion</label>
+        <span class="pts">+1 pt</span>
+      </div>
+      <div class="score-item" onclick="toggleCheck('eating_disorder',1,this)">
+        <input type="checkbox" id="eating_disorder" value="1">
+        <label for="eating_disorder">History of eating disorder</label>
+        <span class="pts">+1 pt</span>
+      </div>
+      <div class="score-item" onclick="toggleCheck('bruxism',1,this)">
+        <input type="checkbox" id="bruxism" value="1">
+        <label for="bruxism">Clenching or grinding (bruxism)</label>
+        <span class="pts">+1 pt</span>
+      </div>
+      <div class="score-item" onclick="toggleCheck('sensitivity',1,this)">
+        <input type="checkbox" id="sensitivity" value="1">
+        <label for="sensitivity">Regular tooth sensitivity</label>
+        <span class="pts">+1 pt</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="section-num">3</span> BEWE score</h2>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Basic Erosive Wear Examination — select the highest score recorded (BEWE 2.0)</p>
+    <div class="bewe-grid">
+      <div class="bewe-btn" onclick="selectBEWE(0,0,this)">
+        <span class="score-num">0</span>
+        <span class="score-label">No wear</span>
+      </div>
+      <div class="bewe-btn" onclick="selectBEWE(1,0,this)">
+        <span class="score-num">1</span>
+        <span class="score-label">Initial loss of surface texture</span>
+      </div>
+      <div class="bewe-btn" onclick="selectBEWE(2,1,this)">
+        <span class="score-num">2</span>
+        <span class="score-label">&lt;50% surface loss</span>
+      </div>
+      <div class="bewe-btn" onclick="selectBEWE(3,2,this)">
+        <span class="score-num">3</span>
+        <span class="score-label">≥50% surface loss</span>
+      </div>
+      <div class="bewe-btn" onclick="selectBEWE(4,4,this)">
+        <span class="score-num">4</span>
+        <span class="score-label">Severe — pulp exposure risk</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="section-num">4</span> Risk score &amp; category</h2>
+    <div class="risk-display empty" id="riskDisplay">
+      <div class="risk-score" id="riskScore">—</div>
+      <div class="risk-label" id="riskLabel">Complete sections above</div>
+      <div class="risk-sublabel" id="riskSublabel">Score will calculate automatically</div>
+    </div>
+    <div class="threshold-note">Thresholds: Low 0–2 · Medium 3–5 · High 6+</div>
+    <div class="score-breakdown" id="scoreBreakdown" style="text-align:center;margin-top:8px;"></div>
+  </div>
+
+  <div class="section">
+    <h2><span class="section-num">5</span> Main risk factors identified</h2>
+    <div class="factors-grid">
+      <div class="factor-item">
+        <input type="checkbox" id="f_age">
+        <label for="f_age">Age-related increased risk</label>
+      </div>
+      <div class="factor-item">
+        <input type="checkbox" id="f_freq">
+        <label for="f_freq">Higher eating frequency</label>
+      </div>
+      <div class="factor-item">
+        <input type="checkbox" id="f_acid">
+        <label for="f_acid">Acid exposure (diet / reflux)</label>
+      </div>
+      <div class="factor-item">
+        <input type="checkbox" id="f_wear">
+        <label for="f_wear">Existing tooth wear (BEWE score)</label>
+      </div>
+      <div class="factor-item">
+        <input type="checkbox" id="f_brux">
+        <label for="f_brux">Clenching or grinding</label>
+      </div>
+      <div class="factor-item">
+        <input type="checkbox" id="f_sens">
+        <label for="f_sens">Tooth sensitivity</label>
+      </div>
+      <div class="factor-item">
+        <input type="checkbox" id="f_ed">
+        <label for="f_ed">History of eating disorder</label>
+      </div>
+      <div class="factor-item">
+        <input type="checkbox" id="f_male">
+        <label for="f_male">Male sex (increased risk group)</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="section-num">6</span> Recommendations</h2>
+    <div class="recs-list">
+      <div class="rec-item">
+        <input type="checkbox" id="r1" checked>
+        <label for="r1">Use a fluoride toothpaste twice daily — do not rinse after brushing</label>
+      </div>
+      <div class="rec-item">
+        <input type="checkbox" id="r2" checked>
+        <label for="r2">Avoid brushing immediately after eating or drinking acidic foods and drinks — wait at least 30 minutes</label>
+      </div>
+      <div class="rec-item">
+        <input type="checkbox" id="r3">
+        <label for="r3">Reduce the frequency of eating and snacking — aim for 3–4 occasions per day</label>
+      </div>
+      <div class="rec-item">
+        <input type="checkbox" id="r4">
+        <label for="r4">Limit acidic foods and drinks (fizzy drinks, citrus, vinegar-based foods, smoothies)</label>
+      </div>
+      <div class="rec-item">
+        <input type="checkbox" id="r5">
+        <label for="r5">Use a straw when drinking acidic beverages to reduce tooth contact</label>
+      </div>
+      <div class="rec-item">
+        <input type="checkbox" id="r6">
+        <label for="r6">Speak to your GP about managing acid reflux or GORD</label>
+      </div>
+      <div class="rec-item">
+        <input type="checkbox" id="r7">
+        <label for="r7">Consider a nightguard to protect teeth from clenching or grinding during sleep</label>
+      </div>
+      <div class="rec-item">
+        <input type="checkbox" id="r8">
+        <label for="r8">High-fluoride prescription toothpaste recommended (Duraphat 5000)</label>
+      </div>
+      <div class="rec-item">
+        <input type="checkbox" id="r9">
+        <label for="r9">Further assessment and possible treatment planning — please attend for a dedicated appointment</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="section-num">7</span> Next steps</h2>
+    <div class="next-steps">
+      <div class="next-step-card low" id="step-low">
+        <div class="step-label">Low risk</div>
+        <p>Monitor at routine examinations. Continue good prevention habits.</p>
+      </div>
+      <div class="next-step-card medium" id="step-medium">
+        <div class="step-label">Moderate risk</div>
+        <p>Structured monitoring every 6 months. Review risk factors at each visit.</p>
+      </div>
+      <div class="next-step-card high" id="step-high">
+        <div class="step-label">High risk</div>
+        <p>Further assessment and treatment planning. Book a dedicated appointment.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="section-num">8</span> Clinical notes</h2>
+    <textarea class="notes-area" placeholder="Additional clinical observations, teeth affected, treatment discussed…"></textarea>
+  </div>
+
+  <div class="btn-row" style="margin-top:32px;">
+    <button class="cd-btn cd-btn-dark" onclick="window.print()">⬇ Print / Save as PDF</button>
+    <button class="cd-btn cd-btn-gold" onclick="sendToReception()">✉ Send to Reception</button>
+  </div>
+<script>
+  function sendToReception(){
+    const patient=document.getElementById('patientName').value||'(name not entered)';
+    const now=new Date();
+    const date=String(now.getDate()).padStart(2,'0')+'/'+String(now.getMonth()+1).padStart(2,'0')+'/'+now.getFullYear();
+    const time=now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+    window.location.href='mailto:reception@completedentistrysurrey.co.uk?subject='+
+      encodeURIComponent('Tooth Wear Assessment Completed – '+patient)+
+      '&body='+encodeURIComponent('Tooth Wear Assessment\n────────────────────────────────────\nPatient   : '+patient+'\nCompleted : '+date+' at '+time+'\n\nPlease print and file the assessment in the patient\'s notes.\n\n— Practify Clinical Tools');
+  }
+</script>
+
+</div>
+
+<script>
+  let scores = { sex: 0, age: 0, eating: 0, reflux: 0, eating_disorder: 0, bruxism: 0, sensitivity: 0, bewe: 0 };
+  let beweSelected = null;
+
+  function selectRadio(group, id, pts, el) {
+    document.querySelectorAll(`input[name="${group}"]`).forEach(r => {
+      r.closest('.score-item').classList.remove('selected');
+    });
+    document.getElementById(id).checked = true;
+    el.classList.add('selected');
+    scores[group] = pts;
+    updateScore();
+  }
+
+  function toggleCheck(id, pts, el) {
+    const cb = document.getElementById(id);
+    if (el.tagName !== 'INPUT') cb.checked = !cb.checked;
+    el.classList.toggle('selected', cb.checked);
+    scores[id] = cb.checked ? pts : 0;
+    updateScore();
+  }
+
+  function selectBEWE(score, pts, el) {
+    document.querySelectorAll('.bewe-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    beweSelected = score;
+    scores.bewe = pts;
+    updateScore();
+  }
+
+  function updateScore() {
+    const total = Object.values(scores).reduce((a, b) => a + b, 0);
+    const display = document.getElementById('riskDisplay');
+    const scoreEl = document.getElementById('riskScore');
+    const labelEl = document.getElementById('riskLabel');
+    const subEl = document.getElementById('riskSublabel');
+    const breakdown = document.getElementById('scoreBreakdown');
+    const stepLow = document.getElementById('step-low');
+    const stepMed = document.getElementById('step-medium');
+    const stepHigh = document.getElementById('step-high');
+
+    scoreEl.textContent = total;
+
+    display.className = 'risk-display';
+    stepLow.classList.remove('active-step');
+    stepMed.classList.remove('active-step');
+    stepHigh.classList.remove('active-step');
+
+    if (total <= 2) {
+      display.classList.add('low');
+      labelEl.textContent = 'Low Risk';
+      subEl.textContent = 'Score 0–2 · Monitor at routine appointments';
+      stepLow.classList.add('active-step');
+    } else if (total <= 5) {
+      display.classList.add('medium');
+      labelEl.textContent = 'Moderate Risk';
+      subEl.textContent = 'Score 3–5 · Structured monitoring every 6 months';
+      stepMed.classList.add('active-step');
+    } else {
+      display.classList.add('high');
+      labelEl.textContent = 'High Risk';
+      subEl.textContent = 'Score 6+ · Further assessment and treatment planning';
+      stepHigh.classList.add('active-step');
+    }
+
+    const parts = [];
+    if (scores.sex > 0) parts.push(`Sex +${scores.sex}`);
+    if (scores.age > 0) parts.push(`Age +${scores.age}`);
+    if (scores.eating > 0) parts.push(`Eating frequency +${scores.eating}`);
+    if (scores.reflux > 0) parts.push(`Reflux +${scores.reflux}`);
+    if (scores.eating_disorder > 0) parts.push(`Eating disorder +${scores.eating_disorder}`);
+    if (scores.bruxism > 0) parts.push(`Bruxism +${scores.bruxism}`);
+    if (scores.sensitivity > 0) parts.push(`Sensitivity +${scores.sensitivity}`);
+    if (scores.bewe > 0) parts.push(`BEWE +${scores.bewe}`);
+    breakdown.textContent = parts.length ? parts.join(' · ') : '';
+  }
+
+  document.getElementById('assessmentDate').valueAsDate = new Date();
+
+  document.querySelectorAll('.score-item input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('click', e => e.stopPropagation());
+  });
+</script>
+</body>
+</html>
