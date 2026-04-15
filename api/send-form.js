@@ -136,6 +136,29 @@ function buildToothWearEmail(data) {
   };
 }
 
+// ── Medical History ───────────────────────────────────────────────────────────
+function buildMedicalEmail(data) {
+  const rows = table([
+    row("Patient name", `<strong>${data.patientName}</strong>`),
+    row("Date of birth", data.patientDob),
+    row("Date submitted", new Date().toLocaleDateString("en-GB")),
+  ].join(""));
+
+  const bodyText = `<p style="font-size:13px;color:#4b5563;line-height:1.65;margin:0;">
+    The completed medical history form is attached as a PDF. Please save this to the patient's record in SOE.
+  </p>`;
+
+  const attachments = data.pdfBase64
+    ? [{ filename: `Medical_History_${(data.patientName || "Patient").replace(/\s+/g, "_")}_${data.patientDob || ""}.pdf`, content: data.pdfBase64 }]
+    : [];
+
+  return {
+    subject: `Medical History Form — ${data.patientName}`,
+    html: chrome("Medical History Form Received", null, rows + bodyText),
+    attachments,
+  };
+}
+
 // ── Patient acknowledgement (website mode auto-send) ──────────────────────────
 function buildAckEmail(patientName, formTitle) {
   const body = `
@@ -210,6 +233,7 @@ module.exports = async function handler(req, res) {
     tmj:       "Jaw Pain Assessment",
     smile:     "Smile Design Questionnaire",
     toothwear: "Tooth Wear Assessment",
+    medical:   "Medical History Form",
   };
 
   try {
@@ -226,6 +250,7 @@ module.exports = async function handler(req, res) {
       case "tmj":       emailData = buildTMJEmail(data);       break;
       case "smile":     emailData = buildSmileEmail(data);     break;
       case "toothwear": emailData = buildToothWearEmail(data); break;
+      case "medical":   emailData = buildMedicalEmail(data);   break;
       default:
         return res.status(400).json({ error: `Unknown formType: ${formType}` });
     }
