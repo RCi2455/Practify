@@ -4,6 +4,7 @@ import TMJOnline from './components/TMJOnline';
 import ToothWearAssessment from './components/ToothWearAssessment';
 import SmileDesignQuestionnaire from './components/SmileDesignQuestionnaire';
 import MedicalHistoryForm from './components/MedicalHistoryForm';
+import TreatmentPlanLetter from './components/TreatmentPlanLetter';
 
 const primary = '#3D3830';
 const gold    = '#C9BA9B';
@@ -18,9 +19,9 @@ const TOOLS = [
   },
   {
     id: 'tmj',
-    icon: '🫦',
+    icon: '🦴',
     title: 'Jaw Pain Checker',
-    desc: 'Answer a few short questions about your jaw symptoms and we\'ll give you personalised guidance.',
+    desc: "Answer a few short questions about your jaw symptoms and we'll give you personalised guidance.",
   },
   {
     id: 'toothwear',
@@ -30,9 +31,9 @@ const TOOLS = [
   },
   {
     id: 'smiledesign',
-    icon: '✨',
+    icon: '✿',
     title: 'Smile Design Questionnaire',
-    desc: 'Tell us about your smile goals and we\'ll be in touch to talk through your options.',
+    desc: "Tell us about your smile goals and we'll be in touch to talk through your options.",
   },
   {
     id: 'medhistory',
@@ -40,22 +41,25 @@ const TOOLS = [
     title: 'Medical History Form',
     desc: 'Secure pre-appointment medical history — completed online, signed digitally, sent directly to the practice.',
   },
+  {
+    id: 'treatmentplan',
+    icon: '📄',
+    title: 'Implant Treatment Plan',
+    desc: 'Generate a personalised implant treatment plan letter — reviewed, signed digitally by the patient, and sent automatically to reception.',
+  },
 ];
 
 const DOCS = [
-
-    { title: 'Post-Op Instructions – Oral Surgery / Extraction', file: 'patient-documents/post-op-oral-surgery.html' },
-    { title: 'Post-Op Instructions – Implant Surgery',           file: 'patient-documents/post-op-implant-surgery.html' },
-    { title: 'Implant Consent Form',                            file: 'patient-documents/implant-consent.html' },
-    { title: 'Patient Implant & Aftercare Information',          file: 'patient-documents/implant-aftercare-info.html' },
-    { title: 'Conscious Sedation Information',                   file: 'patient-documents/conscious-sedation-info.html' },
-    { title: 'Sedation Instructions – Before & After',           file: 'patient-documents/sedation-instructions.html' },
-    { title: 'Tooth Wear Assessment (Clinical)',                 file: 'patient-documents/tooth-wear-assessment.html' },
-    { title: 'Tooth Wear Risk – Patient Leaflet',               file: 'patient-documents/tooth-wear-patient-leaflet.html' },
-    { title: 'Bisphosphonates & Your Dental Health',            file: 'patient-documents/bisphosphonate-advice.html' },
-  ];
-
-  
+  { title: 'Post-Op Instructions — Oral Surgery / Extraction', file: 'patient-documents/post-op-oral-surgery.html' },
+  { title: 'Post-Op Instructions — Implant Surgery',           file: 'patient-documents/post-op-implant-surgery.html' },
+  { title: 'Implant Consent Form',                             file: 'patient-documents/implant-consent.html' },
+  { title: 'Patient Implant & Aftercare Information',          file: 'patient-documents/implant-aftercare-info.html' },
+  { title: 'Conscious Sedation Information',                   file: 'patient-documents/conscious-sedation-info.html' },
+  { title: 'Sedation Instructions — Before & After',           file: 'patient-documents/sedation-instructions.html' },
+  { title: 'Tooth Wear Assessment (Clinical)',                  file: 'patient-documents/tooth-wear-assessment.html' },
+  { title: 'Tooth Wear Risk — Patient Leaflet',                file: 'patient-documents/tooth-wear-patient-leaflet.html' },
+  { title: 'Bisphosphonates & Your Dental Health',             file: 'patient-documents/bisphosphonate-advice.html' },
+];
 
 function BackButton({ onClick }) {
   return (
@@ -81,7 +85,7 @@ function Hub({ setView }) {
   return (
     <div style={{ minHeight: '100vh', background: pageBg, fontFamily: 'system-ui', paddingBottom: 60 }}>
 
-      {/* ── HEADER ── */}
+      {/* HEADER */}
       <div style={{ background: primary, padding: '28px 32px' }}>
         <div style={{ height: 3, background: 'linear-gradient(to right, #BFA98A, #C9BA9B, #BFA98A)', marginBottom: 24, marginLeft: -32, marginRight: -32, marginTop: -28 }} />
         <div style={{ maxWidth: 900, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
@@ -106,7 +110,7 @@ function Hub({ setView }) {
 
       <div style={{ maxWidth: 900, margin: '0 auto', padding: '40px 24px' }}>
 
-        {/* ── CLINICAL TOOLS ── */}
+        {/* CLINICAL TOOLS */}
         <div style={{ marginBottom: 48 }}>
           <div style={{ fontSize: 9, letterSpacing: 3, textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: 14 }}>
             Clinical Tools
@@ -136,7 +140,7 @@ function Hub({ setView }) {
           </div>
         </div>
 
-        {/* ── PATIENT DOCUMENTS ── */}
+        {/* PATIENT DOCUMENTS */}
         <div>
           <div style={{ fontSize: 9, letterSpacing: 3, textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: 14 }}>
             Patient Documents
@@ -169,16 +173,14 @@ function Hub({ setView }) {
             ))}
           </div>
         </div>
-
       </div>
 
-      {/* ── FOOTER ── */}
+      {/* FOOTER */}
       <div style={{ borderTop: '1px solid rgba(201,186,155,0.12)', padding: '16px 32px', textAlign: 'center' }}>
         <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.2)', letterSpacing: 0.5 }}>
           Practify · Complete Dentistry is a trading name of Warlingham Green Health Limited · Registered No. 07311805
         </span>
       </div>
-
     </div>
   );
 }
@@ -186,10 +188,11 @@ function Hub({ setView }) {
 export default function App() {
   const [view, setView] = useState('hub');
 
-  if (view === 'symptom')   return <><BackButton onClick={() => setView('hub')} /><SymptomChecker /></>;
-  if (view === 'tmj')       return <><BackButton onClick={() => setView('hub')} /><TMJOnline /></>;
-  if (view === 'toothwear') return <><BackButton onClick={() => setView('hub')} /><ToothWearAssessment /></>;
-  if (view === 'smiledesign') return <><BackButton onClick={() => setView('hub')} /><SmileDesignQuestionnaire /></>;
-  if (view === 'medhistory') return <><BackButton onClick={() => setView('hub')} /><MedicalHistoryForm /></>;
+  if (view === 'symptom')      return <><BackButton onClick={() => setView('hub')} /><SymptomChecker /></>;
+  if (view === 'tmj')          return <><BackButton onClick={() => setView('hub')} /><TMJOnline /></>;
+  if (view === 'toothwear')    return <><BackButton onClick={() => setView('hub')} /><ToothWearAssessment /></>;
+  if (view === 'smiledesign')  return <><BackButton onClick={() => setView('hub')} /><SmileDesignQuestionnaire /></>;
+  if (view === 'medhistory')   return <><BackButton onClick={() => setView('hub')} /><MedicalHistoryForm /></>;
+  if (view === 'treatmentplan') return <><BackButton onClick={() => setView('hub')} /><TreatmentPlanLetter /></>;
   return <Hub setView={setView} />;
 }
