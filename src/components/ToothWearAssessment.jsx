@@ -217,7 +217,7 @@ export default function ToothWearAssessment() {
 
   var score = calcScore(answers);
   var risk  = getRisk(score);
-  var rd    = RISK[risk];
+ 
 
   var canNext = function() {
     if (step === "details") return !!(patient.name.trim()) && !!(patient.dob);
