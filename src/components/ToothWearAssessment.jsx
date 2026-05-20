@@ -216,6 +216,7 @@ export default function ToothWearAssessment() {
   var cq   = isQ ? QUESTIONS[qIdx] : null;
 
   var score = calcScore(answers);
+  // eslint-disable-next-line no-unused-vars
   var risk  = getRisk(score);
  
 
