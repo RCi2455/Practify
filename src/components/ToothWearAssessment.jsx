@@ -303,7 +303,7 @@ export default function ToothWearAssessment() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        type: "toothwear",
+        formType: "toothwear",
         name: patient.name,
         dob: patient.dob,
         email: patient.email,
