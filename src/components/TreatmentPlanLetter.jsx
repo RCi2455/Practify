@@ -250,7 +250,7 @@ export default function TreatmentPlanLetter() {
     await document.fonts.ready;
     await new Promise(r => setTimeout(r, 400));
 
-    const canvas = await html2canvas(rd, { scale: 2, useCORS: true, logging: false, backgroundColor: '#ffffff', width: 750 });
+    const canvas = await html2canvas(rd, { scale: 1.5, useCORS: true, logging: false, backgroundColor: '#ffffff', width: 750 });
     const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
     const pw = pdf.internal.pageSize.getWidth();
     const ph = pdf.internal.pageSize.getHeight();

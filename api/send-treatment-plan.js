@@ -2,13 +2,14 @@
 // Practify — Treatment Plan email handler via Resend
 // Called by TreatmentPlanLetter.jsx after patient signs
 
+// Increase body size limit — image-based PDFs exceed Vercel's 4.5MB default
 const { Resend } = require("resend");
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const TO     = "reception@completedentistrysurrey.co.uk";
 const FROM   = "Practify <noreply@completedentistrysurrey.co.uk>";
 
-module.exports = async function handler(req, res) {
+async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -75,4 +76,13 @@ module.exports = async function handler(req, res) {
     console.error("[send-treatment-plan] Resend error:", err);
     return res.status(500).json({ error: "Failed to send email", detail: err.message });
   }
+}
+
+module.exports = handler;
+module.exports.config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "20mb",
+    },
+  },
 };

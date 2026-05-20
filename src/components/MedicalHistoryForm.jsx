@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 
 // ── Config ────────────────────────────────────────────────────────────────────
-const NETLIFY_FN = "/.netlify/functions/send-medical-history";
+const NETLIFY_FN = "/api/send-medical-history";
 
 // ── Medical conditions ────────────────────────────────────────────────────────
 const CONDITIONS_1 = [
