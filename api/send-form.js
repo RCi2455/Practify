@@ -49,6 +49,14 @@ function panel(label, content) {
 
 // ── TMJ ───────────────────────────────────────────────────────────────────────
 function buildTMJEmail(data) {
+  if (data.rawHtml) {
+    return {
+      subject: "New TMJ Assessment - " + data.name,
+      html: data.answerSummary,
+      attachments: [],
+    };
+  }
+
   const rows = table([
     row("Patient name", `<strong>${data.name}</strong>`),
     row("Date of birth", data.dob),
@@ -113,26 +121,24 @@ function buildSmileEmail(data) {
 
 // ── Tooth Wear ────────────────────────────────────────────────────────────────
 function buildToothWearEmail(data) {
+  if (data.rawHtml) {
+    return {
+      subject: "Tooth Wear Assessment - " + data.name,
+      html: data.answerSummary,
+      attachments: [],
+    };
+  }
   const rows = table([
-    row("Patient name", `<strong>${data.name}</strong>`),
+    row("Patient name", "<strong>" + data.name + "</strong>"),
     row("Date of birth", data.dob),
     row("Phone", data.phone),
     row("Email", data.email),
-    row("Mode", data.mode === "website" ? "Online (patient self-completed)" : "In-practice"),
     row("Date submitted", data.dateSubmitted),
   ].join(""));
-
-  const responsesPanel = panel("Assessment Responses",
-    `<pre style="font-size:12px;color:#4b5563;line-height:1.8;white-space:pre-wrap;margin:0;">${data.answerSummary}</pre>`);
-
-  const attachments = data.pdfBase64
-    ? [{ filename: `ToothWear_Assessment_${(data.name || "Patient").replace(/\s+/g, "_")}.pdf`, content: data.pdfBase64 }]
-    : [];
-
   return {
-    subject: `New Tooth Wear Assessment — ${data.name}`,
-    html: chrome("New Tooth Wear Assessment", data.mode === "website" ? "Online submission" : "In-practice", rows + responsesPanel),
-    attachments,
+    subject: "Tooth Wear Assessment - " + data.name,
+    html: chrome("Tooth Wear Risk Assessment", "Online Patient Submission", rows),
+    attachments: [],
   };
 }
 

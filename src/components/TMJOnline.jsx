@@ -391,7 +391,7 @@ export default function TMJOnline() {
   var sendingS = useState(false); var sending = sendingS[0]; var setSending = sendingS[1];
   var doneS    = useState(false); var done = doneS[0]; var setDone = doneS[1];
   var errorS   = useState(""); var error = errorS[0]; var setError = errorS[1];
-  var showTriS = useState(false); var showTriage = showTriS[0]; var setShowTriage = showTriS[1];
+
 
   var qIdx = step.startsWith("q") ? parseInt(step.slice(1), 10) : null;
   var isQ  = qIdx !== null;
@@ -499,7 +499,7 @@ export default function TMJOnline() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        formType: "toothwear",
+        formType: "tmj",
         name: patient.name,
         dob: patient.dob,
         email: patient.email,
@@ -521,7 +521,7 @@ export default function TMJOnline() {
 
   var reset = function() {
     setStep("details"); setPatient({ name: "", dob: "", email: "", phone: "" });
-    setAnswers({}); setSlider(0); setDone(false); setError(""); setShowTriage(false);
+    setAnswers({}); setSlider(0); setDone(false); setError("");
   };
 
   return (
@@ -604,14 +604,13 @@ export default function TMJOnline() {
       {!done && step === "results" && (
         <div style={{ maxWidth: 580, width: "100%", margin: "0 16px", display: "flex", flexDirection: "column", gap: 16 }}>
 
-          {/* Patient card */}
           <div style={Object.assign({}, cardStyle, { margin: 0 })}>
-            <div style={{ background: stageColors[stage] + "18", border: "1.5px solid " + stageColors[stage] + "40", borderRadius: 10, padding: "10px 14px", marginBottom: 18 }}>
-              <span style={{ fontSize: 12, fontWeight: 500, color: stageColors[stage] }}>Assessment completed - {new Date().toLocaleDateString("en-GB")}</span>
+            <div style={{ background: "#f0fdf4", border: "1.5px solid #86efac", borderRadius: 10, padding: "10px 14px", marginBottom: 18 }}>
+              <span style={{ fontSize: 12, fontWeight: 500, color: "#166534" }}>Assessment completed - {new Date().toLocaleDateString("en-GB")}</span>
             </div>
             <div style={{ fontFamily: serif, fontSize: 26, color: primary, marginBottom: 10, lineHeight: 1.3 }}>{gd.title}</div>
             <p style={{ fontSize: 14, lineHeight: 1.75, color: "#4B5563", marginBottom: 18 }}>{gd.summary}</p>
-            <div style={{ marginBottom: 18 }}>
+            <div style={{ marginBottom: 20 }}>
               <div style={{ fontSize: 12, fontWeight: 500, color: primary, marginBottom: 10 }}>What you can do now:</div>
               {gd.advice.map(function(tip, i) {
                 return (
@@ -624,38 +623,28 @@ export default function TMJOnline() {
                 );
               })}
             </div>
-            <div style={{ background: primary, borderRadius: 12, padding: "16px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
-              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.82)", lineHeight: 1.55, margin: 0, flex: 1 }}>{gd.urgency}</p>
-              <a href="tel:01883622222" style={{ background: brand, color: primary, padding: "12px 20px", borderRadius: 8, fontSize: 13, fontWeight: 500, textDecoration: "none", whiteSpace: "nowrap" }}>Call 01883 622222</a>
-            </div>
-          </div>
 
-          {/* Clinician triage tree */}
-          <div style={Object.assign({}, cardStyle, { margin: 0, border: "1.5px solid " + primary })}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer" }} onClick={function() { setShowTriage(function(s) { return !s; }); }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <span style={{ fontSize: 13, fontWeight: 600, color: primary }}>Clinician Triage</span>
-                <span style={{ background: stageColors[stage], color: white, padding: "2px 10px", borderRadius: 20, fontSize: 11 }}>Wilkes Stage {stage}</span>
-                <span style={{ background: priority.color, color: white, padding: "2px 10px", borderRadius: 20, fontSize: 11 }}>{priority.label}</span>
+            <div style={{ background: primary, borderRadius: 12, padding: "20px 20px", marginBottom: 0 }}>
+              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.9)", lineHeight: 1.65, margin: "0 0 16px" }}>
+                {gd.urgency} Request an appointment below and we will be in touch to discuss your results and find a convenient time for you.
+              </p>
+              {error && <p style={{ color: "#fca5a5", fontSize: 13, marginBottom: 12 }}>{error}</p>}
+              <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+                <button onClick={handleSubmit} disabled={sending} style={{ background: brand, color: primary, border: "none", borderRadius: 8, padding: "13px 24px", fontSize: 14, fontWeight: 600, cursor: "pointer", flex: 1, opacity: sending ? 0.6 : 1, fontFamily: font }}>
+                  {sending ? "Sending..." : "Request an Appointment"}
+                </button>
+                <a href="tel:01883622222" style={{ background: "rgba(255,255,255,0.12)", color: white, padding: "13px 20px", borderRadius: 8, fontSize: 13, fontWeight: 500, textDecoration: "none", whiteSpace: "nowrap", textAlign: "center" }}>
+                  Call 01883 622222
+                </a>
               </div>
-              <span style={{ color: primary, fontSize: 14 }}>{showTriage ? "Hide" : "Show"}</span>
+              <p style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", marginTop: 10, marginBottom: 0 }}>
+                Your responses will be sent securely to the practice when you request an appointment.
+              </p>
             </div>
-            {showTriage && (
-              <TriageTree score={score} stage={stage} nerveFlags={nerveFlags} paraFlags={paraFlags} priority={priority} />
-            )}
           </div>
 
-          {/* Submit */}
-          <div style={Object.assign({}, cardStyle, { margin: 0 })}>
-            <div style={{ fontSize: 13, fontWeight: 500, color: primary, marginBottom: 6 }}>Send results to the practice</div>
-            <p style={{ fontSize: 13, color: muted, marginBottom: 16, lineHeight: 1.6 }}>Submit your assessment and our team will be in touch to discuss your results and arrange a convenient time to see you.</p>
-            {error && <p style={{ color: "#c0392b", fontSize: 13, marginBottom: 12 }}>{error}</p>}
-            <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-              <button onClick={handleSubmit} style={Object.assign({}, btnP, { flex: 1, opacity: sending ? 0.5 : 1 })} disabled={sending}>
-                {sending ? "Sending..." : "Submit Assessment"}
-              </button>
-              <button onClick={reset} style={Object.assign({}, btnS, { flex: 1 })}>Start Again</button>
-            </div>
+          <div style={{ textAlign: "center" }}>
+            <button onClick={reset} style={{ background: "transparent", border: "none", color: "rgba(255,255,255,0.5)", fontSize: 12, cursor: "pointer", fontFamily: font }}>Start again</button>
           </div>
 
         </div>
