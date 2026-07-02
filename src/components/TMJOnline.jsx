@@ -338,7 +338,6 @@ function ProgressBar(props) {
     </div>
   );
 }
-
 // eslint-disable-next-line no-unused-vars
 function TriageTree(props) {
   var score       = props.score;
